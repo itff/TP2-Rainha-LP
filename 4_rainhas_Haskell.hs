@@ -5,7 +5,7 @@ import Data.List
 -- safe arrangements. each solution is a list of the columns where the queens are
 -- located for each row
 queens :: Int -> [[Int]]
-queens n = map fst $ foldM oneMoreQueen ([],[1..n]) [1..n]  where 
+queens n = map fst $ foldM addQueen ([],[1..n]) [1..n]  where 
  
   -- foldM :: (Monad m) => (a -> b -> m a) -> a -> [b] -> m a
   -- foldM folds (from left to right) in the list monad, which is convenient for 
@@ -15,7 +15,7 @@ queens n = map fst $ foldM oneMoreQueen ([],[1..n]) [1..n]  where
   -- given a safe arrangement y of queens in the first i rows, and a list of 
   -- possible choices, "oneMoreQueen y _" returns a list of all the safe 
   -- arrangements of queens in the first (i+1) rows along with remaining choices 
-  oneMoreQueen (y,d) _ = [(x:y, delete x d) | x <- d, safe x]  where
+  addQueen (y,d) _ = [(x:y, delete x d) | x <- d, safe x]  where
  
     -- "safe x" tests whether a queen at column x is safe from previous queens
     safe x = and [x /= c + n && x /= c - n | (n,c) <- zip [1..] y]
