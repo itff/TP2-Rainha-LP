@@ -24,8 +24,8 @@ queens([C|Cs], Row0, [Col|Solution]) :-
 	queens(Board, Row, Solution).
 
 
-/** <examples>
+/** <rodar>
 
-?- queens(8, Queens).
+?- queens(4, Queens).
 
 */
