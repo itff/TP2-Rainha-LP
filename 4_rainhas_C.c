@@ -16,11 +16,9 @@ bool isSafe(int board[N][N], int row, int col) {
     return true;
 }
 
-//A recursive utility problem to solve N queens problem.
 bool solveNQUtil(int board[N][N], int col, int queens_position[N]) {
-
     if (col >= N){
-    // Caso já tenha colocado todas rainhas
+    // Caso jÃ¡ tenha colocado todas rainhas
         return true;
     }
     for (int i = 0; i < N; i++) {
@@ -38,7 +36,7 @@ bool solveNQUtil(int board[N][N], int col, int queens_position[N]) {
     return false;
 }
 
-//Printa as posições das Rainhas
+//Printa as posiÃ§Ãµes das Rainhas
 void printSolution(int queens_position[N]) {
     printf("Posicoes possiveis para rainha = [");
     for (int i = 0; i < N; i++) {
@@ -53,7 +51,7 @@ int main() {
     for (int p = 0; p < N; p++){
         memset(board, 0, sizeof board);
         memset(queens_position, 0, sizeof queens_position);
-        // Coloca uma rainha em cada linha da primeira coluna, teremos todos as solução para N = 4
+        // Coloca uma rainha em cada linha da primeira coluna, teremos todos as soluÃ§Ã£o para N = 4
         board[p][0] = 1;
         bool hasSolution;
         hasSolution = solveNQUtil(board, 1, queens_position);
