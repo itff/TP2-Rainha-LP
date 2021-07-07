@@ -1,31 +1,16 @@
-queens(N, Queens) :-
-	length(Queens, N),
-	board(Queens, Board, 0, N, _, _),
-	queens(Board, 0, Queens).
+queens(N,S) :-
+    add(1,N,L),
+    permutation(L,S),
+	safe(S).
 
-board([], [], N, N, _, _).
-board([_|Queens], [Col-Vars|Board], Col0, N, [_|VR], VC) :-
-	Col is Col0+1,
-	functor(Vars, f, N),
-	constraints(N, Vars, VR, VC),
-	board(Queens, Board, Col, N, VR, [_|VC]).
+safe([Y|Ys]) :- safe(Ys), \+ attack(Y,Ys).
+safe([]).
 
-constraints(0, _, _, _) :- !.
-constraints(N, Row, [R|Rs], [C|Cs]) :-
-	arg(N, Row, R-C),
-	M is N-1,
-	constraints(M, Row, Rs, Cs).
+attack(R,L) :- 
+    attack(R,1,L).
+	attack(R,N,[Y|_]) :- R is Y+N ; R is Y-N.
+	attack(R,N,[_|Ys]) :- N1 is N+1, attack(R,N1,Ys).
 
-queens([], _, []).
-queens([C|Cs], Row0, [Col|Solution]) :-
-	Row is Row0+1,
-	select(Col-Vars, [C|Cs], Board),
-	arg(Row, Vars, Row-Row),
-	queens(Board, Row, Solution).
-
-
-/** <rodar>
-
-?- queens(4, Queens).
-
-*/
+add(M,N,[M|L]) :- 
+    M<N, M1 is M+1, add(M1,N,L).
+	add(N,N,[N]).
