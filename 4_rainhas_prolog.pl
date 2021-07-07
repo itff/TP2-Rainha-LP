@@ -1,5 +1,5 @@
 queens(N, Queens) :-
-    length(Queens, N),
+	length(Queens, N),
 	board(Queens, Board, 0, N, _, _),
 	queens(Board, 0, Queens).
 
